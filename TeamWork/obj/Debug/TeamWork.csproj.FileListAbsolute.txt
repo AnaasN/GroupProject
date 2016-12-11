@@ -1,0 +1,6 @@
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\bin\Debug\TeamWork.exe.config
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\bin\Debug\TeamWork.exe
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\bin\Debug\TeamWork.pdb
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\obj\Debug\TeamWork.csprojResolveAssemblyReference.cache
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\obj\Debug\TeamWork.exe
+C:\Users\amand_000\Documents\Visual Studio 2015\Projects\TeamWork\TeamWork\obj\Debug\TeamWork.pdb
