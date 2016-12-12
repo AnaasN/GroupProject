@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace XsAndOs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char[,] BoardCoords = new char[4, 4];
+            int TurnNumber = 1;
+            char WinnerCheck;
+            bool XVictory = false;
+            bool OVictory = false;
+            //1 = x 
+            //-1 = y 
+
+            char Flag = FlagSetting();
+            
+            //Initialisation Ended, begin loop
+            while (!XVictory && !OVictory && (TurnNumber <= 9))
+            {
+                if ((TurnNumber % 2) == 0)
+                {
+                    Flag = 'x';
+                }
+                else
+                {
+                    Flag = 'o';
+                }
+                
+                InputCoords(Flag, ref BoardCoords);
+                DrawBoard(BoardCoords);
+                WinnerCheck = (VictoryCheck(BoardCoords));
+                if (WinnerCheck == 'x')
+                {
+                    Console.WriteLine("X wins");
+                    XVictory = true;
+                    //Input Banner
+                }
+                else if (WinnerCheck == 'o')
+                {
+                    Console.WriteLine("O wins");
+                    OVictory = true;
+                    //input Banner
+                }
+                TurnNumber++;
+            }
+        }
+
+        static char FlagSetting()
+        {
+            string PlayerOneSymbol;
+            string PlayerTwoSymbol;
+            char Flag;
+
+            TitleBanner();
+            Console.WriteLine("Player, choose thy symbol (x or o ~LOWERCASE~).");
+            PlayerOneSymbol = Console.ReadLine();
+            if (PlayerOneSymbol == "x")
+            {
+                Flag = 'x';
+                PlayerTwoSymbol = "o";
+            }
+            else
+            {
+                Flag = 'o';
+                PlayerTwoSymbol = "x";
+            }
+            return Flag;
+        }
+
+        static void DrawBoard(char[,] InBoardCoords)
+        {
+
+            Console.WriteLine("position = {0}", InBoardCoords);
+            Console.WriteLine("     |     |      ");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", InBoardCoords[1, 1], InBoardCoords[2, 1], InBoardCoords[3, 1]);
+            Console.WriteLine("_____|_____|_____ ");
+            Console.WriteLine("     |     |      ");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", InBoardCoords[1, 2], InBoardCoords[2, 2], InBoardCoords[3, 2]);
+            Console.WriteLine("_____|_____|_____ ");
+            Console.WriteLine("     |     |      ");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", InBoardCoords[1, 3], InBoardCoords[2, 3], InBoardCoords[3, 3]);
+            Console.WriteLine("     |     |      ");
+        }
+
+        static void InputCoords(char PlayerSymbol, ref char[,] InBoardCoords)
+        {
+            int[] OutXYCoords = new int[2];
+            int XCoord;
+            int YCoord;
+            bool InputtingSuccess = false;
+            while (!InputtingSuccess)
+            {
+                Console.WriteLine("Player {0} enter your X co-ordinate:", PlayerSymbol);
+                XCoord = int.Parse(Console.ReadLine());
+                Console.WriteLine("Player {0} enter your Y co-ordinate:", PlayerSymbol);
+                YCoord = int.Parse(Console.ReadLine());
+                if (InBoardCoords[XCoord, YCoord] != 'x' && InBoardCoords[XCoord, YCoord] != 'o')
+                {
+                    Console.WriteLine("Placement Success");
+                    InputtingSuccess = true;
+                    InBoardCoords[XCoord, YCoord] = PlayerSymbol;
+                }
+                else
+                {
+                    Console.WriteLine("Place Taken");
+                }
+            }
+        }
+
+        static char VictoryCheck(char[,] InBoardCoords)
+        {
+            char OutVictory = ' ';
+
+            //rows
+            if (InBoardCoords[1,1] == InBoardCoords[2,1] && InBoardCoords[2,1] == InBoardCoords[3,1]) OutVictory = InBoardCoords[1, 1];
+            else if (InBoardCoords[2,1] == InBoardCoords[2,2] && InBoardCoords[2,2] == InBoardCoords[2,3]) OutVictory = InBoardCoords[2, 1];
+            else if (InBoardCoords[3,1] == InBoardCoords[3,2] && InBoardCoords[3,2] == InBoardCoords[3,3])  OutVictory = InBoardCoords[3, 1];
+
+            //Columns
+            if (InBoardCoords[1, 1] == InBoardCoords[1, 2] && InBoardCoords[1, 2] == InBoardCoords[1, 3]) OutVictory = InBoardCoords[1, 1];
+            else if (InBoardCoords[2, 1] == InBoardCoords[2, 2] && InBoardCoords[2, 2] == InBoardCoords[2, 3]) OutVictory = InBoardCoords[2, 1];
+            else if (InBoardCoords[3, 1] == InBoardCoords[3, 2] && InBoardCoords[3, 2] == InBoardCoords[3, 3]) OutVictory = InBoardCoords[3, 2];
+
+            //Diagnol
+            if (InBoardCoords[1, 1] == InBoardCoords[2, 2] && InBoardCoords[2, 2] == InBoardCoords[3, 3]) OutVictory = InBoardCoords[1, 1];
+            else if (InBoardCoords[3, 1] == InBoardCoords[2, 2] && InBoardCoords[2, 2] == InBoardCoords[1, 3]) OutVictory = InBoardCoords[3, 1];
+
+            Console.WriteLine(OutVictory);
+            return OutVictory;
+        }
+
+        //Sprouse the Moose
+        static void TitleBanner()
+        {
+            Console.WriteLine(@"___ _ ____    ___ ____ ____ _  _    ___ ____ ____ ");
+            Console.WriteLine(@" |  | |        |  |__| |    |_/      |  |  | |___ ");
+            Console.WriteLine(@" |  | |___     |  |  | |___ | \_     |  |__| |___ ");
+            
+        }
+    }
+}
