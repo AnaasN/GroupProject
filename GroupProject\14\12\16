@@ -50,7 +50,7 @@ namespace XsAndOs
             }
         }
 
-        static char FlagSetting()
+        static char FlagSetting()//made redundant by first while loop.
         {
             string PlayerOneSymbol;
             string PlayerTwoSymbol;
